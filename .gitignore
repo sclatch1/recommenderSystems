@@ -211,3 +211,5 @@ __marimo__/
 data/
 
 .idea/
+.DS_Store
+src/.DS_Store

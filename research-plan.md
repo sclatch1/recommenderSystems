@@ -28,7 +28,7 @@ Answer the following questions in the context of the research questions/directio
 #### Answer
 
 - users, producer, development team, society and editor
-- Because I want my recommender to be fast (i.e. efficient) and promote relevant games, having a overall high user engagement with my platform. I care about the user, producer and development team.
+- Because I want my recommender to promote relevant games, having a overall high user engagement with my platform. I care about the user, producer and development team.
 - yes, I consider the stakeholders that align with my objectives to be more important. So I'm ignoring the societal and editor needs.
 
 ### Stakeholder Goals
