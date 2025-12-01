@@ -14,3 +14,9 @@
 ├── src
 └── uv.lock
 ```
+
+## generating the docs
+
+```bash
+uv run mkdocs serve
+```

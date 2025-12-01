@@ -28,7 +28,7 @@ Answer the following questions in the context of the research questions/directio
 #### Answer
 
 - users, producer, development team, society and editor
-- Because I want my recommender to promote relevant games, having a overall high user engagement with my platform. I care about the user, producer and development team.
+- I care about users, development teams and producer
 - yes, I consider the stakeholders that align with my objectives to be more important. So I'm ignoring the societal and editor needs.
 
 ### Stakeholder Goals
@@ -40,9 +40,14 @@ Now that you have listed your stakeholder(s), please answer the following questi
 - Which stakeholder goals will you pursue in your project? 
 
 #### Answer
-- provider (making money); users (discover new games); development team (cost efficient); editor (promote his/her items); society (equal treatement to all users)
-- The goals of the stakeholders that I care about overlap. So users want to discover novel item, they also want the system to work fast. This in turn will make money and align with the cost efficiency of the development team. The societal and editor are at odds, because games that they promote might not interest the users.
-- as stated before: the provider, user and development team
+- Users: recieve relevant and diverse recommendations; discover new games
+- producer: fair exposure for both popular and nich games.
+- development team: effiecient with high user satisfaction
+
+
+
+- The goals of the stakeholders that I care about overlap. So users want to discover novel and niche item, they also want the system to work fast. This in turn will make money and align with the cost efficiency of the development team. The societal and editor are at odds, because games that they promote might not interest the users.
+- as stated before: the providers, users and development team
 
 
 ### Desired System Properties
@@ -55,9 +60,13 @@ Please answer the following questions in the context of the research questions/d
 
 #### Answer
 
-- efficient ranking of a large dataset, ranking novel item higher
-- No immediately, but my goal is to first rank 1000 games or so with the Two tower architecture which is fast and then use another more powerfull (slower) algorithm to rank those 1000 games.
+- ability to recommend beyond top popular items (reduce the popularity bias)
+- maintain high ranking relevance (NDCG@10)
+- lightweight efficient algorithm (itemKNN variants)
+- good long-tail item coverage
+- pursuing diversity and novelty
 
+- Not perfectly - reducing popularity bias often reduces accuracy. This tradeoff will be at the core of the research.
 
 ## Coming Up with a Solution
 
@@ -85,9 +94,13 @@ Please answer the following questions in the context of the evaluation objective
 
 #### Answer
 
-- (draft) Can the Two-Tower retrieval architecture followed by a slower but more powerful reranker produce better recommendation quality than standard baselines (popularity, ItemKNN, BPR, LightGCN) while being effiecient and resulting in a lower training time?
-- Todo (i cannot answer those questions yet as I Have changed my research direction)
-
+- How does applying inverse-popularity weighting to ItemKNN affect the trade-off between recommendation accuracy (Recall@10, NDCG@10) and long-tail exposure (Gini index, Coverage, Novelty) on the Steam dataset?
+- Popularity-weighted ItemKNN will significantly improve long-tail exposure (lower Gini, higher Coverage, higher Novelty) but will decrease accuracy (lower Recall@10 and NDCG@10) compared to standard ItemKNN
+- theory:   
+    - Known theory: Collaborative filtering exaggerates popularity bias.
+    - Validated metrics: Gini index, coverage, and novelty are established measures of exposure fairness.
+    - Intuition: Penalizing popular items redistributes similarity strength toward niche items.
+    The hypothesis is grounded in empirical observation, theory, and intuition.
 
 ## Designing an Offline Evaluation Experiment
 
@@ -124,7 +137,7 @@ what countermeasures you will take in the design of your experiment to avoid it.
 
 #### Answer
 
--
+- 
 - By finetuning the baseline and chosen algorithm equally. And preprocessign the data such that it removes certain biases more geared towards certain algorithms. (e.g. popularity based algorithm) 
 
 #### Reliability
@@ -145,7 +158,11 @@ what measures you will take in the design of your experiment to ensure it is.
 
 #### Answer
 
-[TODO]
+- Re-runnable: Notebook must run top-to-bottom without errors; deterministic seeding.
+- Repeatable: Fix random seeds and document environment (package versions).
+- Reproducible: Clean code, documented paths, modular functions.
+- Reusable: Functions for training, evaluation, splitting, and preprocessing; clear naming.
+- Replicable: Describe methodology clearly in the report; someone could reimplement it from scratch.
 
 
 ### Aspects of Offline Experimental Design
@@ -178,7 +195,7 @@ Please answer the following questions in the context of the dataset you will use
 
 - some basic statistic: Reviews:	7,793,069, Users:	2,567,538, Items:	15,474, Bundles:	615
 
-
+- TODO
 
 ### Data Preprocessing
 
