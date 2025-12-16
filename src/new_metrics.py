@@ -1,0 +1,116 @@
+import numpy as np
+from scipy.sparse import csr_matrix
+
+from recpack.metrics.base import ListwiseMetricK
+
+
+def gini_index(x: np.ndarray) -> float:
+    """
+    Compute the Gini index of a non-negative vector.
+    """
+    if np.all(x == 0):
+        return 0.0
+
+    x = np.sort(x)
+    n = len(x)
+    index = np.arange(1, n + 1)
+
+    return (2 * np.sum(index * x)) / (n * np.sum(x)) - (n + 1) / n
+
+
+class ItemGiniK(ListwiseMetricK):
+    """
+    Computes the Gini index of the item distribution in Top-K recommendations.
+
+    This metric is:
+    - 0 when all items are recommended equally often
+    - maximized when all recommendations are for the same item
+
+    Lower values indicate fairer recommendation distributions.
+
+    :param K: Size of the recommendation list consisting of the Top-K item predictions.
+    :type K: int
+    """
+
+    def __init__(self, K: int):
+        super().__init__(K)
+
+    def _calculate(self, y_true: csr_matrix, y_pred_top_K: csr_matrix) -> None:
+        """
+        Compute the Gini index over item recommendation counts.
+        """
+
+        # Count how many times each item appears in Top-K recommendations
+        # Sum over users (rows)
+        item_counts = np.asarray(y_pred_top_K.sum(axis=0)).ravel()
+
+        if item_counts.sum() == 0:
+            gini = 1.0
+        else:
+            gini = gini_index(item_counts[item_counts > 0])
+
+        # RecPack expects per-user scores; replicate the global value
+        self.scores_ = csr_matrix(
+            np.full((y_pred_top_K.shape[0], 1), gini)
+        )
+
+class PublisherGiniK(ListwiseMetricK):
+    """
+    Computes the Gini index of the publisher distribution
+    in Top-K recommendations.
+
+    This metric is:
+    - 0 when all publishers are recommended equally often
+    - maximized when all recommendations come from one publisher
+
+    Lower values indicate fairer publisher exposure.
+
+    Requires a mapping from item indices to publisher indices.
+
+    :param K: Size of the recommendation list consisting of the Top-K item predictions.
+    :type K: int
+    """
+
+    def __init__(self, K: int):
+        super().__init__(K)
+        self.item_to_publisher = None
+        self.n_publishers = None
+
+    def fit(self, item_to_publisher: np.ndarray) -> None:
+        """
+        Fit an item → publisher mapping.
+
+        :param item_to_publisher: Array mapping item indices to publisher indices.
+                                  Length must equal number of items.
+        :type item_to_publisher: np.ndarray
+        """
+        self.item_to_publisher = np.asarray(item_to_publisher)
+        self.n_publishers = int(self.item_to_publisher.max()) + 1
+
+    def _calculate(self, y_true: csr_matrix, y_pred_top_K: csr_matrix) -> None:
+        """
+        Compute the publisher Gini index over Top-K recommendations.
+        """
+
+        if self.item_to_publisher is None:
+            raise RuntimeError("PublisherGiniK must be fitted before calling calculate().")
+
+        # Count item recommendations
+        item_counts = np.asarray(y_pred_top_K.sum(axis=0)).ravel()
+
+        if item_counts.sum() == 0:
+            gini = 1.0
+        else:
+            # Aggregate item counts to publisher counts
+            publisher_counts = np.zeros(self.n_publishers, dtype=np.float64)
+            for item_idx, count in enumerate(item_counts):
+                if count > 0:
+                    publisher_idx = self.item_to_publisher[item_idx]
+                    publisher_counts[publisher_idx] += count
+
+            gini = gini_index(publisher_counts[publisher_counts > 0])
+
+        # Replicate global score per user (RecPack convention)
+        self.scores_ = csr_matrix(
+            np.full((y_pred_top_K.shape[0], 1), gini)
+        )

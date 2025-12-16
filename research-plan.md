@@ -40,9 +40,9 @@ Now that you have listed your stakeholder(s), please answer the following questi
 - Which stakeholder goals will you pursue in your project? 
 
 #### Answer
-- Users: recieve relevant and diverse recommendations; discover new games
+- Users: recieve relevant and diverse recommendations; discover new games. -> Rank novel items highest
 - producer: fair exposure for both popular and nich games.
-- development team: effiecient with high user satisfaction
+- development team: use limited resources and time for training -> a reason why I limit my hyperparameter tuning, ... (limited training -> faster iterations -> better and faster recommendation to the users)
 
 
 
@@ -62,7 +62,7 @@ Please answer the following questions in the context of the research questions/d
 
 - ability to recommend beyond top popular items (reduce the popularity bias)
 - maintain high ranking relevance (NDCG@10)
-- lightweight efficient algorithm (itemKNN variants)
+- lightweight efficient algorithm (Matrix Factorisation variants)
 - good long-tail item coverage
 - pursuing diversity and novelty
 
@@ -94,13 +94,9 @@ Please answer the following questions in the context of the evaluation objective
 
 #### Answer
 
-- How does applying inverse-popularity weighting to ItemKNN affect the trade-off between recommendation accuracy (Recall@10, NDCG@10) and long-tail exposure (Gini index, Coverage, Novelty) on the Steam dataset?
-- Popularity-weighted ItemKNN will significantly improve long-tail exposure (lower Gini, higher Coverage, higher Novelty) but will decrease accuracy (lower Recall@10 and NDCG@10) compared to standard ItemKNN
-- theory:   
-    - Known theory: Collaborative filtering exaggerates popularity bias.
-    - Validated metrics: Gini index, coverage, and novelty are established measures of exposure fairness.
-    - Intuition: Penalizing popular items redistributes similarity strength toward niche items.
-    The hypothesis is grounded in empirical observation, theory, and intuition.
+- To what extent does applying the Personal Popularity Aware Counterfactual (PPAC) framework to an MF-BPR recommender reduce popularity bias, measured by the Item GINI Index, while preserving recommendation accuracy measured by NDCG@10 and Recall@10 for active Steam users (≥10 interactions) on the Steam dataset?
+- TODO
+- TODO
 
 ## Designing an Offline Evaluation Experiment
 
@@ -136,9 +132,37 @@ Consider how you might introduce selection bias, confounding and researcher bias
 what countermeasures you will take in the design of your experiment to avoid it.
 
 #### Answer
+1. confounding:
+    - issues
+        - Using different hyperparameter tuning budget
+        - training on different data split
+    - counter measures:
+        - using the same train/validation/test split.
+        - same parameters
+        - evaluate using same metrics
+        - all theses are remedies by appyling my pipeline together with recpack pipeline
 
-- 
-- By finetuning the baseline and chosen algorithm equally. And preprocessign the data such that it removes certain biases more geared towards certain algorithms. (e.g. popularity based algorithm) 
+1. selection bias:
+    - issue
+        - Restricting evaluation to active steam users (>= 10 interactions) may result in sample not being representative of overall steam population
+    - counter measure
+        - clearly justify focus on active users in the research question
+        - apply the >= interaction filter before splitting data, ensuring consistency
+        - report data statisitics after preprocessing (number of users, items, interactions)
+        - Acknoledge limited generalizability to cold start users and explicitly scope conclusions to active users. 
+
+1. research bias:
+    - issue
+        - selecting metrics or baselines that favor popularity debaising methods
+        - reporting only favorable results ??
+        - iteratively adjusting design choice until PPAC perfoms best
+    - countermeasure
+        - Predefine the research question, metrics, baselines, and evaluation protocol before running experiments.
+        - Use standard and widely accepted baselines (MF-BPR without calibration).
+        - Report both accuracy metrics (NDCG@10, Recall@10) and fairness metrics (Item GINI), even if trade-offs occur.
+        - Present all results transparently, including cases where PPAC reduces accuracy.
+        - Run experiments with multiple random seeds and report mean and standard deviation.
+        - Avoid post-hoc metric selection; all reported metrics must be directly motivated by the research question
 
 #### Reliability
 
@@ -158,11 +182,29 @@ what measures you will take in the design of your experiment to ensure it is.
 
 #### Answer
 
-- Re-runnable: Notebook must run top-to-bottom without errors; deterministic seeding.
-- Repeatable: Fix random seeds and document environment (package versions).
-- Reproducible: Clean code, documented paths, modular functions.
-- Reusable: Functions for training, evaluation, splitting, and preprocessing; clear naming.
-- Replicable: Describe methodology clearly in the report; someone could reimplement it from scratch.
+Reliability: 
+    - Use a single, consistent pipeline for preprocessing, training, calibration, and evaluation.
+    - Apply sanity checks and fixed library versions to avoid errors and inconsistencies.
+
+Re-runnability: 
+    - Design the code so it can be executed end‑to‑end (“run all”) without manual intervention.
+    - Provide a single entry point for execution.
+
+Repeatability:
+    - Fix random seeds for data splitting, model initialization, and negative sampling.
+    - Report results averaged over multiple runs with standard deviations.
+
+Reproducibility:
+    - Share complete code, dataset version, preprocessing steps, and dependency specifications.
+    - Provide clear instructions to rerun the experiment and reproduce results.
+
+Reusability:
+    - Write modular, well-documented code with configurable parameters.
+    - Separate data processing, modeling, calibration (PPAC), and evaluation components.
+
+Replicability
+    - Fully describe the dataset, MF‑BPR setup, PPAC method, and evaluation protocol in the report.
+    - Define all metrics clearly so the experiment can be reimplemented from scratch.
 
 
 ### Aspects of Offline Experimental Design
@@ -193,7 +235,13 @@ Please answer the following questions in the context of the dataset you will use
 
 #### Answer
 
+
+- October 2010 to January 2018.
+- Australian users
+- 
+- 
 - some basic statistic: Reviews:	7,793,069, Users:	2,567,538, Items:	15,474, Bundles:	615
+
 
 - TODO
 
@@ -210,8 +258,22 @@ Please answer the following questions in the context of the hypothesis/research 
 - Is the sampled/filtered/processed dataset still representative of the original dataset? 
 
 #### Answer
-- So that the dataset is consitent and meaningfull for my algorithm, also to remove biased.
-
+ - preprocessing is needed to ensure data quality and alignment with the research question. Filtering removes noise that BPRMF cannot learn
+ from reliably, and enables a fair evaluation.
+ - what filters to apply ?   
+    - filter to remove users with >= interactions
+    - map user, item to contiguous indices 
+    - sparse matrix -> csr matrices
+ - Best way to apply ?
+    - apply filters before splitting 
+    - use random seeds
+ - effect on dataset characteristics ?
+    - remove sparsity and noise
+    - remove cold start user
+    - lower long tails coverage
+ - is the processed dataset still representative ?
+    - the dataset remains representative of active Steam users, which match the RQ
+ 
 
 ### Data Splitting
 
@@ -221,13 +283,20 @@ Please answer the following questions in the context of the hypothesis/research 
 - How large a timeframe span our datasets?
 - Can I split it in a time-aware fashion? 
 - Is the order of interactions likely important in this application domain?
-- Are tehere large differences in the lengths of usrs’ interaction histories in the datasets?
+- Are there large differences in the lengths of users’ interaction histories in the datasets?
 - Do all users have reasonably long interaction histories, such that we may assume their preferences are well-known?
 - In what way will I split the dataset? 
 
 #### Answer
 
-[TODO]
+- yes we have still in the 10 000's users
+- 
+- No, we do not have timestamps
+- todo
+- yes, but we have filter out users with less than 10 interactions
+- 
+- I will use Weak generalization
+
 
 
 ### Selection of Baselines
@@ -239,7 +308,7 @@ Please answer the following questions in the context of the hypothesis/research 
 
 #### Answer
 
-- papers have use BPR as a baseline algorithm
+- 
 
 
 ### Hyperparameter Tuning
@@ -254,7 +323,7 @@ Please answer the following questions in the context of the hypothesis/research 
 
 #### Answer
 
-[TODO] 
+
 
 
 ### Metric Selection
@@ -268,7 +337,7 @@ Please answer the following questions in the context of the hypothesis/research 
 
 #### Answer
 
-- in the first phase recall and in the second phase ndcg10 and history distance
+- todo
 - todo
 - todo
 - todo

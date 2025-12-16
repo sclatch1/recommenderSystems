@@ -1,5 +1,79 @@
 import numpy as np
 import pandas as pd
+import torch
+from collections import defaultdict
+
+
+def cal_global_nov(train_records, num_items):
+    """
+    Calculate global novelty scores for items
+    
+    Parameters
+    ----------
+    train_records : dict
+        Dictionary mapping user indices to lists of item indices
+    num_items : int
+        Total number of items
+    
+    Returns
+    -------
+    torch.Tensor, torch.Tensor
+        Global novelty scores and popularity counts
+    """
+    pop = [0] * num_items
+    nov = [1] * num_items
+    for user in train_records:
+        for item in train_records[user]:
+            pop[item] += 1
+    u_num = len(train_records)
+    for i in range(num_items):
+        if pop[i] > 0:
+            nov[i] = -(1 / np.log2(u_num)) * np.log2(pop[i] / u_num)
+    return torch.tensor(nov), torch.tensor(pop)
+
+def cal_local_nov_simple(train_records, num_users, num_items):
+    """
+    Calculate local novelty scores for user-item pairs (simplified version)
+    
+    This version computes local novelty based on user-specific interaction patterns
+    without requiring pre-computed similar users.
+    
+    Parameters
+    ----------
+    train_records : dict
+        Dictionary mapping user indices to lists of item indices
+    num_users : int
+        Total number of users
+    num_items : int
+        Total number of items
+    
+    Returns
+    -------
+    torch.Tensor, torch.Tensor
+        Local novelty scores (num_users x num_items) and local popularity
+    """
+    local_nov = [[1.0] * num_items for _ in range(num_users)]
+    local_pop = [[0] * num_items for _ in range(num_users)]
+    
+    # For each user, calculate novelty based on their interaction history
+    for user in train_records:
+        user_items = train_records[user]
+        total_interactions = len(user_items)
+        
+        if total_interactions > 0:
+            # Count item frequencies in user's history
+            item_counts = defaultdict(int)
+            for item in user_items:
+                item_counts[item] += 1
+            
+            # Calculate novelty for each item the user interacted with
+            for item in user_items:
+                local_pop[user][item] = item_counts[item]
+                # Novelty: less frequent items have higher novelty
+                local_nov[user][item] = -(1 / np.log2(total_interactions + 1)) * \
+                                        np.log2(item_counts[item] / total_interactions)
+    
+    return torch.tensor(local_nov), torch.tensor(local_pop)
 
 
 def gini_index(x: np.array):

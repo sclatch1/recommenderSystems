@@ -213,3 +213,5 @@ data/
 .idea/
 .DS_Store
 src/.DS_Store
+
+*.zip
