@@ -115,7 +115,7 @@ class PPAC_BPRMF(MyBPRMF):
         learning_rate=0.005,
         gamma=0.1,
         beta=0.1,
-        reg_coe=0.001,
+        reg_coe=1e-3,
         l2_coe=1e-4,
         use_simplified_local=True,
         save_best_to_file=False,

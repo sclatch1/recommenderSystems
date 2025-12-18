@@ -228,7 +228,32 @@ def calculate_item_gini(predictions: pd.DataFrame, k: int) -> float:
         return 1
 
     item_counts = recommendations["item_id"].value_counts()
-    return gini_index(item_counts.to_numpy())
+    return gini_index(item_counts[item_counts > 0].to_numpy())
+
+
+def calculate_mean_popularity(
+    predictions: pd.DataFrame,
+    train_interactions: pd.DataFrame,
+    k: int,
+) -> float:
+    """
+    Mean popularity of recommended items.
+
+    Lower is better (less popularity bias).
+    """
+    # Count item popularity from training data
+    item_popularity = train_interactions["item_id"].value_counts()
+
+    # Keep top-k per user
+    recommendations = get_top_k(predictions, k)
+    if len(recommendations) == 0:
+        return 0.0
+
+    # Map popularity (unseen items → 0)
+    pop = recommendations["item_id"].map(item_popularity).fillna(0)
+
+    # Log-transform to reduce heavy-tail effect
+    return np.mean(np.log1p(pop.to_numpy()))
 
 
 def calculate_publisher_gini(

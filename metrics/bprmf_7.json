@@ -1,0 +1,32 @@
+{
+    "NDCGK_10":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.2554825396
+    },
+    "NDCGK_20":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.2534472119
+    },
+    "NDCGK_30":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.2486027908
+    },
+    "NDCGK_50":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.2468018233
+    },
+    "ItemGiniK_10":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.9686499155
+    },
+    "ItemGiniK_20":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.9723927476
+    },
+    "ItemGiniK_50":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.9723927476
+    },
+    "RecallK_10":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.2239052003
+    },
+    "RecallK_20":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.2706347923
+    },
+    "RecallK_50":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.553319737256367e-05,lambda_w=0.00019388692127159638,learning_rate=0.00045930403600652464,max_epochs=4,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7c14fc7ae890>,validation_sample_size=200)":0.2706347923
+    }
+}

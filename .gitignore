@@ -215,3 +215,4 @@ data/
 src/.DS_Store
 
 *.zip
+*.csv

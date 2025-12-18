@@ -1,2 +1,0 @@
-,NDCGK_10,NDCGK_20,NDCGK_30
-"PPAC_BPRMF(batch_size=512,beta=-32,gamma=64,keep_last=False,l2_coe=1e-07,learning_rate=0.005,max_epochs=4,num_components=128,predict_topK=100,reg_coe=1e-06,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)",0.295283566394974,0.30606925748669594,0.3223711189568832

@@ -1,0 +1,26 @@
+{
+    "NDCGK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":0.1317240353
+    },
+    "NDCGK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":0.1395156839
+    },
+    "ItemGiniK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":0.9431092897
+    },
+    "ItemGiniK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":0.9375710314
+    },
+    "RecallK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":0.090361753
+    },
+    "RecallK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":0.1417906791
+    },
+    "MeanItemPopularityK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":9.8541815291
+    },
+    "MeanItemPopularityK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=8,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,use_simplified_local=True,validation_sample_size=200)":9.5927759289
+    }
+}

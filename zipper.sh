@@ -11,5 +11,5 @@ base="$(basename "$input")"
 
 cd output
 
-zip "zip_folders/${base}_recommendations.csv.zip" "${base}_recommendations.csv"
+zip "zip_folders/${base}_recommendations.csv.zip" "${base}.csv"
 echo "Created zip_folders/${base}_recommendations.csv.zip"

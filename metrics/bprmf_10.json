@@ -1,0 +1,32 @@
+{
+    "NDCGK_10":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.3048995655
+    },
+    "NDCGK_20":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.3162202238
+    },
+    "NDCGK_30":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.333021252
+    },
+    "NDCGK_50":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.3581430837
+    },
+    "ItemGiniK_10":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.9507518606
+    },
+    "ItemGiniK_20":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.953877014
+    },
+    "ItemGiniK_50":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.9528507274
+    },
+    "RecallK_10":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.2594902404
+    },
+    "RecallK_20":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.3296041148
+    },
+    "RecallK_50":{
+        "MyBPRMF(batch_size=512,keep_last=False,lambda_h=4.55332e-05,lambda_w=0.0001938869,learning_rate=0.005,max_epochs=8,max_iter_no_change=5,min_improvement=0.01,num_components=128,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x70c4999a9a50>,validation_sample_size=200)":0.4515334391
+    }
+}

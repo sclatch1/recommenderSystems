@@ -1,0 +1,32 @@
+{
+    "NDCGK_10":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.2657834177
+    },
+    "NDCGK_20":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.2644227805
+    },
+    "NDCGK_30":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.2593978402
+    },
+    "NDCGK_50":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.2575352023
+    },
+    "ItemGiniK_10":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.9728742465
+    },
+    "ItemGiniK_20":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.9718945683
+    },
+    "ItemGiniK_50":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.9718945683
+    },
+    "RecallK_10":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.2349447359
+    },
+    "RecallK_20":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.285815362
+    },
+    "RecallK_50":{
+        "MyBPRMF(batch_size=256,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=5,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=20,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x7a52addeb010>,validation_sample_size=200)":0.285815362
+    }
+}
