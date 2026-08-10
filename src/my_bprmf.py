@@ -2,10 +2,9 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from collections import defaultdict
 from recpack.algorithms.bprmf import BPRMF
 from recpack.algorithms.samplers import BootstrapSampler
-from src.metrics import cal_local_nov_simple, cal_global_nov
+from src.metrics import cal_local_nov, cal_global_nov
 from recpack.scenarios import WeakGeneralization
 from recpack.datasets import DummyDataset
 from hyperopt import hp
@@ -16,6 +15,17 @@ from recpack.pipelines import ALGORITHM_REGISTRY
 from scipy.sparse import lil_matrix
 from recpack.algorithms.bprmf import MFModule
 import torch.optim as optim
+
+
+def _best_available_device() -> torch.device:
+    """recpack's TorchMLAlgorithm only checks torch.cuda.is_available() and
+    otherwise falls back to CPU - it has no notion of Apple's MPS backend, so
+    Mac GPUs go unused unless we override it ourselves here."""
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if torch.backends.mps.is_available():
+        return torch.device("mps")
+    return torch.device("cpu")
 
 
 class MyBPRMF(BPRMF):
@@ -56,6 +66,8 @@ class MyBPRMF(BPRMF):
             predict_topK=predict_topK,
             validation_sample_size=validation_sample_size,
         )
+
+        self.device = _best_available_device()
 
         self.num_components = num_components
         self.lambda_h = lambda_h
@@ -103,10 +115,8 @@ class PPAC_BPRMF(MyBPRMF):
         Regularization coefficient for novelty predictors, by default 0.001
     l2_coe : float, optional
         L2 regularization coefficient for embeddings, by default 1e-4
-    use_simplified_local : bool, optional
-        Use simplified local novelty calculation (without similar users), by default True
     """
-    
+
     def __init__(
         self,
         num_components= 128,
@@ -117,7 +127,6 @@ class PPAC_BPRMF(MyBPRMF):
         beta=0.1,
         reg_coe=1e-3,
         l2_coe=1e-4,
-        use_simplified_local=True,
         save_best_to_file=False,
         keep_last=False,
         predict_topK=100,
@@ -144,8 +153,7 @@ class PPAC_BPRMF(MyBPRMF):
         self.beta = beta
         self.reg_coe = reg_coe
         self.l2_coe = l2_coe
-        self.use_simplified_local = use_simplified_local
-        
+
         # These will be initialized in _init_model
         self.local_pred = None
         self.global_pred = None
@@ -191,28 +199,23 @@ class PPAC_BPRMF(MyBPRMF):
         )
         
         # Convert sparse matrix to train_records format
-        num_users, num_items = X.shape
+        _, num_items = X.shape
         train_records = self._convert_sparse_to_train_records(X)
-        
-        # Calculate global novelty using the original function
-        global_nov, global_pop_counts = cal_global_nov(train_records, num_items)
-        self.global_pop = global_nov.to(self.device)
+
+        # Global popularity: fraction of users who interacted with each item.
+        # The counterfactual term is beta * global_pop with beta < 0, so this
+        # must be actual popularity (high for popular items), not novelty
+        # (cal_global_nov's other return value, which is high for rare items).
+        _, global_pop_counts = cal_global_nov(train_records, num_items)
+        self.global_pop = global_pop_counts.to(self.device)
         self.global_pop = F.normalize(self.global_pop.float(), dim=0)
-        
-        # Calculate local novelty
-        if self.use_simplified_local:
-            local_nov, local_pop_counts = cal_local_nov_simple(
-                train_records, num_users, num_items
-            )
-        else:
-            # If you have similar users, use the original cal_local_nov function
-            # local_nov, local_pop_counts = cal_local_nov(dataset, sim_users, train_records, num_items)
-            # For now, fall back to simplified version
-            local_nov, local_pop_counts = cal_local_nov_simple(
-                train_records, num_users, num_items
-            )
-        
-        self.local_pop = local_nov.to(self.device)
+
+        # Personal popularity: for each user, how popular each item is among
+        # their top-30 Jaccard-similar neighbors. Same reasoning as above -
+        # this must be popularity, not novelty, since gamma * local_pop is
+        # added directly to the recommendation score.
+        _, local_pop_counts = cal_local_nov(X)
+        self.local_pop = local_pop_counts.to(self.device)
         self.local_pop = F.normalize(self.local_pop.float(), dim=1)
         
         # Initialize novelty prediction networks

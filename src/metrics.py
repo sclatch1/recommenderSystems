@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import torch
-from collections import defaultdict
+from scipy.sparse import csr_matrix
 
 
 def cal_global_nov(train_records, num_items):
@@ -31,49 +31,80 @@ def cal_global_nov(train_records, num_items):
             nov[i] = -(1 / np.log2(u_num)) * np.log2(pop[i] / u_num)
     return torch.tensor(nov), torch.tensor(pop)
 
-def cal_local_nov_simple(train_records, num_users, num_items):
+def cal_local_nov(X: csr_matrix, num_neighbors: int = 30, batch_size: int = 1000):
     """
-    Calculate local novelty scores for user-item pairs (simplified version)
-    
-    This version computes local novelty based on user-specific interaction patterns
-    without requiring pre-computed similar users.
-    
+    Calculate personal (local) popularity/novelty scores for user-item pairs,
+    following the PPAC paper: for each user u, find the `num_neighbors` most
+    Jaccard-similar users (by interaction-set overlap), and let local_pop[u, i]
+    be the number of those neighbors who interacted with item i.
+
+    Unlike a user's own interaction history, this is defined for every
+    user-item pair, including items the user has never interacted with -
+    which is what makes it usable as a signal for candidate recommendations.
+
+    Computed in row-batches, fully vectorized within each batch (no
+    per-user Python loop), so it scales to tens of thousands of users. Each
+    batch briefly densifies its (batch_size x num_users) similarity slice;
+    batch_size trades peak memory for fewer, larger vectorized ops.
+
     Parameters
     ----------
-    train_records : dict
-        Dictionary mapping user indices to lists of item indices
-    num_users : int
-        Total number of users
-    num_items : int
-        Total number of items
-    
+    X : scipy.sparse.csr_matrix
+        Binary user-item interaction matrix, shape (num_users, num_items).
+    num_neighbors : int
+        Number of most similar users (by Jaccard similarity) per user.
+    batch_size : int
+        Number of users to process per batch.
+
     Returns
     -------
     torch.Tensor, torch.Tensor
-        Local novelty scores (num_users x num_items) and local popularity
+        Local novelty scores (num_users x num_items) and local popularity (num_users x num_items)
     """
-    local_nov = [[1.0] * num_items for _ in range(num_users)]
-    local_pop = [[0] * num_items for _ in range(num_users)]
-    
-    # For each user, calculate novelty based on their interaction history
-    for user in train_records:
-        user_items = train_records[user]
-        total_interactions = len(user_items)
-        
-        if total_interactions > 0:
-            # Count item frequencies in user's history
-            item_counts = defaultdict(int)
-            for item in user_items:
-                item_counts[item] += 1
-            
-            # Calculate novelty for each item the user interacted with
-            for item in user_items:
-                local_pop[user][item] = item_counts[item]
-                # Novelty: less frequent items have higher novelty
-                local_nov[user][item] = -(1 / np.log2(total_interactions + 1)) * \
-                                        np.log2(item_counts[item] / total_interactions)
-    
-    return torch.tensor(local_nov), torch.tensor(local_pop)
+    X = X.tocsr()
+    num_users, num_items = X.shape
+    X_T = X.T.tocsr()
+    user_sizes = np.asarray(X.sum(axis=1)).ravel().astype(np.float32)
+    k = min(num_neighbors, max(num_users - 1, 1))
+
+    local_pop = np.zeros((num_users, num_items), dtype=np.float32)
+    neighbor_counts = np.zeros(num_users, dtype=np.float32)
+
+    for start in range(0, num_users, batch_size):
+        end = min(start + batch_size, num_users)
+        b = end - start
+
+        intersection = np.asarray((X[start:end] @ X_T).todense(), dtype=np.float32)
+        intersection[np.arange(b), np.arange(start, end)] = 0  # exclude self as neighbor
+
+        union = user_sizes[start:end, None] + user_sizes[None, :] - intersection
+        jaccard = np.divide(
+            intersection, union, out=np.zeros_like(intersection), where=union > 0
+        )
+
+        top_idx = np.argpartition(-jaccard, k - 1, axis=1)[:, :k]  # (b, k)
+        row_ar = np.arange(b)[:, None]
+        top_vals = jaccard[row_ar, top_idx]
+        valid = top_vals > 0  # drop "neighbors" with zero actual overlap
+
+        neighbor_counts[start:end] = valid.sum(axis=1)
+
+        neighbor_indicator = csr_matrix(
+            (np.ones(valid.sum(), dtype=np.float32), (row_ar.repeat(k)[valid.ravel()], top_idx[valid])),
+            shape=(b, num_users),
+        )
+        local_pop[start:end] = np.asarray((neighbor_indicator @ X).todense())
+
+    safe_k = np.maximum(neighbor_counts, 2)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = local_pop / neighbor_counts[:, None]
+        log_ratio = np.where(ratio > 0, np.log2(ratio, where=ratio > 0), 0.0)
+        local_nov = -(1.0 / np.log2(safe_k))[:, None] * log_ratio
+
+    has_signal = (local_pop > 0) & (neighbor_counts[:, None] > 0)
+    local_nov = np.where(has_signal, local_nov, 1.0)
+
+    return torch.tensor(local_nov, dtype=torch.float32), torch.tensor(local_pop, dtype=torch.float32)
 
 
 def gini_index(x: np.array):

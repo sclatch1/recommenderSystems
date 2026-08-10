@@ -12,5 +12,7 @@ dependencies = [
     "ruff>=0.14.4",
     "seaborn>=0.13.2",
     "torch==2.1.1",
-    "numpy==1.26.4", 
+    "numpy==1.26.4",
+    "recpack>=0.3.6",
+    "hyperopt>=0.2.7",
 ]

@@ -20,6 +20,7 @@ from recpack.pipelines import PipelineBuilder
 from src.my_bprmf import MyBPRMF, PPAC_BPRMF
 from recpack.pipelines import ALGORITHM_REGISTRY, METRIC_REGISTRY
 from recpack.algorithms import Popularity, ItemKNN
+from recpack.algorithms.base import TorchMLAlgorithm
 
 from recpack.scenarios.splitters import FractionInteractionSplitter
 
@@ -551,7 +552,7 @@ def run_pipeline(args) -> pd.DataFrame:
     # pb.add_metric("gini_pub", [10,20])
     # pb.add_metric("gini", [])
     pipe = pb.build()
-    scores = pipe.run() 
+    pipe.run()
     df_metrics = pipe.get_metrics()
     df_optimization = None
     if args.optimize:
@@ -566,9 +567,26 @@ def run_pipeline(args) -> pd.DataFrame:
     save_metrics_incremental("metrics/", df_metrics, df_optimization,prefix=f"{args.algo}")
 
 
-    # # model = MyBPRMF(**bpr_params)
-    # # model.fit(X_train_fit, validation_data=X_val)
-    # # scores = model.predict(test_interaction)
+    # This recpack version's Pipeline.run() computes metrics internally but
+    # doesn't expose per-algorithm prediction scores afterward, so retrain +
+    # predict each algorithm again here (reusing the pipeline's own
+    # train/predict helpers, and the exact data splits it used) to get score
+    # matrices for the recommendation export and exposure analysis below.
+    algorithm_configs = [
+        ("PPAC_BPRMF", params_p),
+        ("MyBPRMF", params),
+        ("Popularity", {"K": 10}),
+    ]
+    scores = []
+    for algo_name, algo_params in algorithm_configs:
+        algorithm = ALGORITHM_REGISTRY.get(algo_name)(**algo_params)
+        if isinstance(algorithm, TorchMLAlgorithm):
+            pipe._train(algorithm, pipe.validation_training_data)
+        else:
+            pipe._train(algorithm, pipe.full_training_data)
+        X_pred = pipe._predict_and_postprocess(algorithm, pipe.test_data_in)
+        scores.append((algo_name, X_pred))
+
     all_recommendations = {}
     for algorithm, score in scores:
         df_recos = scores2recommendations(
