@@ -1,3 +1,5 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/e--wBz4e)
+
 # recommenderSystems
 
 Debiasing recommendations with **PPAC-BPRMF** — an AI Project  applying the *Personal Popularity Aware Counterfactual* (PPAC)
@@ -119,5 +121,5 @@ uv run ruff check src/ tests/   # lint
 uv run mkdocs serve        # docs site
 ```
 
-A pre-commit hook (`.pre-commit-config.yaml`) runs ruff automatically on
-commit.
+A pre-commit hook (`.pre-commit-config.yaml`) runs the test suite
+automatically on commit.
