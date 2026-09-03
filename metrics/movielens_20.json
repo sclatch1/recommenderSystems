@@ -1,0 +1,62 @@
+{
+    "NDCGK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.100965188,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.1665071481,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.1630230948
+    },
+    "NDCGK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.1410523823,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.2142786946,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.1993562878
+    },
+    "NDCGK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.2196491258,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.2821665077,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.2377301359
+    },
+    "ItemGiniK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.8328070695,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.8197432859,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.6937478938
+    },
+    "ItemGiniK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.8364173965,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.8090796721,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.703912451
+    },
+    "ItemGiniK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.7831509766,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.7942680882,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.7311360751
+    },
+    "RecallK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.1633097925,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.2612715872,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.2615449519
+    },
+    "RecallK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.2858096097,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.4071201994,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.3759029984
+    },
+    "RecallK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":0.5945263498,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.6676302811,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":0.5263484764
+    },
+    "MeanItemPopularityK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":7.4212112014,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":7.2331795138,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":6.6223303806
+    },
+    "MeanItemPopularityK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":7.30665285,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":7.1384655779,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":6.4934538062
+    },
+    "MeanItemPopularityK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.01,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x13e258b50>,validation_sample_size=None)":7.0695222138,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":6.9437296546,
+        "PPAC_BPRMF(batch_size=512,beta=-128,gamma=256,keep_last=False,l2_coe=0.0001,learning_rate=0.01,max_epochs=20,num_components=64,predict_topK=100,reg_coe=0.1,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x132666c50>,validation_sample_size=2000)":6.2598445964
+    }
+}

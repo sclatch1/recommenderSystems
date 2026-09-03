@@ -15,4 +15,25 @@ dependencies = [
     "numpy==1.26.4",
     "recpack>=0.3.6",
     "hyperopt>=0.2.7",
+    "ydata-profiling>=4.12.2",
+]
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.6.2",
+    "pytest>=9.1.1",
+    "pytest-watcher>=0.6.3",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+exclude = ["notebooks"]
+force-exclude = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = [
+    "ignore:pkg_resources is deprecated as an API:UserWarning",
 ]

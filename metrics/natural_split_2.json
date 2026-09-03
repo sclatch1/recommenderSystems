@@ -1,0 +1,34 @@
+{
+    "NDCGK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":0.0542397793,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.026157866
+    },
+    "NDCGK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":0.0716619733,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.0357134898
+    },
+    "ItemGiniK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":0.8716787571,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.9328687231
+    },
+    "ItemGiniK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":0.893118167,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.925262486
+    },
+    "RecallK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":0.0941022793,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.0466982425
+    },
+    "RecallK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":0.1538848095,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.080115957
+    },
+    "MeanItemPopularityK_10":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":8.6193143095,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":9.4328048431
+    },
+    "MeanItemPopularityK_20":{
+        "PPAC_BPRMF(batch_size=512,beta=-514,gamma=1024,keep_last=False,l2_coe=0.0001,learning_rate=0.005,max_epochs=20,num_components=128,predict_topK=100,reg_coe=0.001,save_best_to_file=False,seed=42,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x141450d90>,validation_sample_size=200)":8.3499010403,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":9.1959329334
+    }
+}

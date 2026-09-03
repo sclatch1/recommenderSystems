@@ -1,0 +1,50 @@
+{
+    "NDCGK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.0068760249,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.1984918137
+    },
+    "NDCGK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.0079096472,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.2026521203
+    },
+    "NDCGK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.0114262697,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.2356741326
+    },
+    "ItemGiniK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.3968298077,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.8756968907
+    },
+    "ItemGiniK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.3408474389,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.8763267971
+    },
+    "ItemGiniK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.2616438518,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.8681938656
+    },
+    "RecallK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.003405782,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.1224906097
+    },
+    "RecallK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.0072802337,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.1888387694
+    },
+    "RecallK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":0.0173030858,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":0.3101663697
+    },
+    "MeanItemPopularityK_10":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":3.8410790207,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":7.0147679904
+    },
+    "MeanItemPopularityK_20":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":3.8381024549,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":6.9315746379
+    },
+    "MeanItemPopularityK_50":{
+        "BPRMF(batch_size=512,keep_last=False,lambda_h=0.0,lambda_w=0.0,learning_rate=0.001,max_epochs=20,max_iter_no_change=5,min_improvement=0.01,num_components=64,predict_topK=100,sample_size=None,save_best_to_file=False,seed=42,stop_early=False,stopping_criterion=<recpack.algorithms.stopping_criterion.StoppingCriterion object at 0x140effcd0>,validation_sample_size=None)":3.8320920597,
+        "ItemKNN(K=200,normalize_X=False,normalize_sim=False,pop_discount=None,similarity=cosine)":6.7492424796
+    }
+}

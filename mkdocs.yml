@@ -1,5 +1,8 @@
 site_name: Games Recommendation System
-site_url: https://recsys.com
+
+nav:
+  - Home: index.md
+  - Methodology & Analysis: analysis.md
 
 theme:
   icon:
@@ -21,6 +24,9 @@ theme:
         name: Light Mode
       primary: blue
       accent: deep orange
+
+plugins:
+  - search
 
 markdown_extensions:
   - pymdownx.highlight:

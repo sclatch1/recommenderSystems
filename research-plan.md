@@ -66,7 +66,7 @@ Please answer the following questions in the context of the research questions/d
 - good long-tail item coverage
 - pursuing diversity and novelty
 
-- Not perfectly - reducing popularity bias often reduces accuracy. This tradeoff will be at the core of the research.
+- Not perfectly, because reducing popularity bias often reduces accuracy. This tradeoff will be at the core of the research.
 
 ## Coming Up with a Solution
 
@@ -95,8 +95,9 @@ Please answer the following questions in the context of the evaluation objective
 #### Answer
 
 - To what extent does applying the Personal Popularity Aware Counterfactual (PPAC) framework to an MF-BPR recommender reduce popularity bias, measured by the Item GINI Index, while preserving recommendation accuracy measured by NDCG@10 and Recall@10 for active Steam users (≥10 interactions) on the Steam dataset?
-- TODO
-- TODO
+- I pose this as a research question rather than a strict hypothesis. PPAC is explicitly designed to trade some accuracy for reduced popularity bias, so the *direction* of the effect (less popularity concentration, some accuracy cost) is expected. What is not established a priori is the *magnitude* of that trade-off on this specific dataset (Steam, implicit feedback, active users only) and algorithm pairing (MF-BPR), which is why I frame the question as "to what extent" rather than asserting a specific effect size.
+- The research question is based on the PPAC framework itself (personalized popularity-aware counterfactual reweighting of BPR's loss, penalizing predictions that are explainable by item popularity alone) as introduced by Zhao et al., "Popularity-Aware Counterfactual Debiasing" (arXiv:2402.07425), together with the broader recommender-systems literature documenting an accuracy/fairness trade-off in popularity-debiasing methods (e.g. Abdollahpouri et al. on popularity bias and calibration).
+- This theory is a mix of a proposed, empirically-validated method and observation rather than a proven universal theorem: the PPAC paper demonstrates the effect on its own benchmark datasets (not Steam), and the general accuracy/fairness trade-off in popularity debiasing is a well-replicated empirical pattern across many papers rather than something derived from first principles. Applying it to the Steam dataset and MF-BPR specifically is therefore a genuine empirical test, not a formality — consistent with what we observed while fixing bugs in our PPAC_BPRMF implementation, where the corrected model shows a real, non-trivial accuracy cost (NDCG@10 drops from 0.243 to 0.152) alongside the expected reduction in popularity concentration (Item Gini@10 drops from 0.982 to 0.841).
 
 ## Designing an Offline Evaluation Experiment
 
@@ -235,7 +236,9 @@ Please answer the following questions in the context of the dataset you will use
 
 #### Answer
 
+https://cseweb.ucsd.edu/~jmcauley/datasets.html#steam_data
 
+- 2018
 - October 2010 to January 2018.
 - Australian users
 - 
@@ -289,13 +292,17 @@ Please answer the following questions in the context of the hypothesis/research 
 
 #### Answer
 
-- yes we have still in the 10 000's users
-- 
-- No, we do not have timestamps
-- todo
-- yes, but we have filter out users with less than 10 interactions
-- 
-- I will use Weak generalization
+- Yes — after filtering to active users (≥10 interactions), the interaction matrix still covers tens of thousands of users (~67,894 on Steam), comfortably enough to hold out a per-user test/validation fraction and still train on a large remaining pool.
+- The raw data spans October 2010–January 2018, but the Steam release exposes playtime, not per-interaction timestamps, so there is no way to recover *when* within that span a given interaction happened.
+- No — a time-aware split needs timestamps to define a global cutoff, and without them we cannot say which of a user's interactions are "past" vs "future". A per-user random holdout (weak generalization) is the only option available with this data.
+- Plausibly, in principle (taste evolves, session context matters), but it isn't answerable from this dataset since it carries no ordering signal. We don't model it, and results should be read as "held-out preference matching," not "next-item prediction."
+- Yes, substantially — post-filtering interaction counts are still long-tailed: many users sit right at the ≥10 threshold while a smaller set have hundreds of interactions. This is exactly why a *global, fixed* exposure count (e.g. "keep items with ≥75 held-out interactions", the PPAC paper's own ml-1M value) doesn't transfer across datasets of different size — it motivates making the equal-exposure quota relative (`exposure_frac`) instead of absolute (see below).
+- Not necessarily — ≥10 interactions is a pragmatic minimum to have *any* signal, not evidence that a user's taste is fully captured. Conclusions are explicitly scoped to "active users" for this reason (see the selection-bias countermeasures above) rather than claiming complete preference knowledge.
+- A two-stage split, implemented in `PPACEqualExposureSplitter` (`src/splitter.py`), reverse-engineered from the PPAC paper's own released split code rather than assumed from the paper text:
+    1. **Natural per-user holdout** (weak generalization) — each user's interactions are shuffled and `test_frac`/`validation_frac` of them are held out; the remainder becomes `train`. This stage alone determines `train`; nothing added later goes back into it.
+    2. **Equal-exposure resample** of the held-out pool — within the test pool (and, independently, the validation pool), an item is kept only if the pool has at least a *quota* of interactions for it, then downsampled to exactly that quota. The quota is expressed as a fraction of the total user base (`exposure_frac`), not a fixed count, so it represents the same relative popularity bar regardless of dataset size. Items below quota are dropped from evaluation entirely, not returned to `train`.
+
+  Both protocols are evaluated for every model, to test whether conclusions depend on the choice of evaluation protocol (RQ2): **`equal_exposure`**, matching the PPAC paper's own protocol — the resample above removes the natural popularity skew from the test set, so a model isn't rewarded for chasing popularity in the eval metric itself; and **`natural`**, which skips step 2 and evaluates directly on stage 1's holdout, preserving the dataset's natural popularity skew. Both share stage 1, so the training set is identical between them — only test-set construction differs, isolating the effect of evaluation protocol from a training-data confound.
 
 
 
